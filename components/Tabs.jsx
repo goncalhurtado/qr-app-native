@@ -33,12 +33,12 @@ function TabsApp() {
           // badge={true} // only show indicator
           // badge="text"
           // badge={1}
-          // onPressIn={() => {
-          //   console.log('onPressIn explore');
-          // }}
-          // onPress={() => {
-          //   console.log('onPress explore');
-          // }}
+          onPressIn={() => {
+            console.log("onPressIn explore");
+          }}
+          onPress={() => {
+            console.log("onPress explore");
+          }}
         >
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
