@@ -3,8 +3,9 @@ import { View, Keyboard } from "react-native";
 import { TextInput, HelperText, Button } from "react-native-paper";
 import style from "../../style/styleSheet";
 import { validationWhatsapp } from "../../helpers/validations";
+import { createWpLink } from "../../helpers/createWpLink";
 
-const Whatsapp = () => {
+const Whatsapp = ({ setData }) => {
   const [input, setInput] = useState({
     number: "",
     message: "",
@@ -30,6 +31,8 @@ const Whatsapp = () => {
     }
 
     Keyboard.dismiss();
+
+    setData(createWpLink(input));
   };
 
   return (

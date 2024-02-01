@@ -3,7 +3,7 @@ import { View } from "react-native";
 
 function TabsApp({ setMenu }) {
   return (
-    <TabsProvider defaultIndex={2}>
+    <TabsProvider defaultIndex={0}>
       <Tabs uppercase={true} disableSwipe={false}>
         <TabScreen
           label="Url"

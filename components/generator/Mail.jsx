@@ -3,8 +3,9 @@ import { View, Keyboard } from "react-native";
 import { TextInput, HelperText, Button } from "react-native-paper";
 import style from "../../style/styleSheet";
 import { validationEmail } from "../../helpers/validations";
+import { createMailLink } from "../../helpers/createMailLink";
 
-const Mail = () => {
+const Mail = ({ setData }) => {
   const [input, setInput] = useState({
     email: "",
     subject: "",
@@ -26,6 +27,7 @@ const Mail = () => {
       return;
     }
     Keyboard.dismiss();
+    setData(createMailLink(input));
   };
 
   return (

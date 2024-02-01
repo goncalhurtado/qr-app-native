@@ -4,7 +4,7 @@ import { TextInput, HelperText, Button } from "react-native-paper";
 import style from "../../style/styleSheet";
 import { validationUrl } from "../../helpers/validations";
 
-const Url = () => {
+const Url = ({ setData }) => {
   const [input, setInput] = useState({
     url: "",
   });
@@ -24,6 +24,7 @@ const Url = () => {
     }
 
     Keyboard.dismiss();
+    setData(input.url);
   };
 
   return (
