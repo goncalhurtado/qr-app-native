@@ -7,10 +7,11 @@ const style = StyleSheet.create({
   button: {
     width: 150,
     alignSelf: "center",
+    marginTop: 10,
   },
   input: {
     width: "100%",
-    marginBottom: 10,
+    marginBottom: 5,
   },
 });
 

@@ -1,23 +1,47 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
-import { TextInput } from "react-native-paper";
-import { Button } from "react-native-paper";
+import { View, Keyboard } from "react-native";
+import { TextInput, HelperText, Button } from "react-native-paper";
 import style from "../../style/styleSheet";
+import { validationUrl } from "../../helpers/validations";
 
 const Url = () => {
-  const [text, setText] = useState("");
+  const [input, setInput] = useState({
+    url: "",
+  });
+  const [error, setError] = useState({
+    boolean: false,
+    message: "",
+  });
+
+  const handleChange = (name, value) => {
+    setError(false);
+    setInput((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmmit = () => {
+    if (!validationUrl(input, setError)) {
+      return;
+    }
+
+    Keyboard.dismiss();
+  };
+
   return (
     <View style={style.container}>
       <TextInput
         style={style.input}
         label="Url"
-        value={text}
-        onChangeText={(text) => setText(text)}
+        value={input.url}
+        onChangeText={(value) => handleChange("url", value)}
         mode="outlined"
+        error={error.boolean}
       />
+      <HelperText type="error" visible={error.boolean}>
+        {error.message}
+      </HelperText>
       <Button
         mode="contained"
-        onPress={() => console.log("Pressed")}
+        onPress={() => handleSubmmit()}
         style={style.button}
       >
         Generar QR
