@@ -1,27 +1,60 @@
 import { Camera, CameraType } from "expo-camera";
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native";
-import { TextInput, HelperText, Button } from "react-native-paper";
+import { Text, View, Linking } from "react-native";
+import { Button, IconButton } from "react-native-paper";
+import { scan, style } from "../../style/styleSheet";
 
 const Scan = () => {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [data, setData] = useState("");
 
-  console.log(permission?.granted);
   function toggleCameraType() {
     setType((current) =>
       current === CameraType.back ? CameraType.front : CameraType.back
     );
   }
 
+  function handleBarCodeScanned({ data }) {
+    setData(data);
+  }
+
+  function openUrl(data) {
+    Linking.openURL(data);
+  }
+
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
   return (
     <View>
       {permission?.granted ? (
         <>
-          <Camera style={{ height: 500 }} type={type} />
-          <TouchableOpacity onPress={toggleCameraType}>
-            <Button icon="camera-flip"></Button>
-          </TouchableOpacity>
+          <View style={scan.container}>
+            <Camera
+              style={scan.camera}
+              type={type}
+              onBarCodeScanned={handleBarCodeScanned}
+              autoFocus="on"
+            />
+            <IconButton
+              iconColor="#663399"
+              icon="camera-flip"
+              style={scan.icon}
+              onPress={toggleCameraType}
+              size={50}
+            ></IconButton>
+          </View>
+          <View>
+            {data != "" ? (
+              <Text style={scan.text} onPress={() => openUrl(data)}>
+                {data}
+              </Text>
+            ) : (
+              <Text style={scan.placeholder}>Scan a Qr</Text>
+            )}
+          </View>
         </>
       ) : (
         <>
@@ -31,7 +64,7 @@ const Scan = () => {
           <Button
             mode="contained"
             onPress={() => requestPermission()}
-            // style={style.button}
+            style={style.button}
           >
             Allow Access
           </Button>

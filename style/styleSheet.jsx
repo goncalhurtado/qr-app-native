@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const style = StyleSheet.create({
+export const style = StyleSheet.create({
   container: {
     padding: 10,
   },
@@ -16,6 +16,42 @@ const style = StyleSheet.create({
   qrContainer: {
     alignSelf: "center",
     marginTop: 20,
+  },
+});
+
+export const scan = StyleSheet.create({
+  container: {
+    width: "100%",
+    height: "75%",
+    position: "relative",
+  },
+  camera: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+  },
+  icon: {
+    position: "absolute",
+    bottom: 10,
+    left: 0,
+    right: 0,
+    left: "50%",
+    transform: [{ translateX: -40 }],
+    zIndex: 2,
+  },
+  text: {
+    color: "#663399",
+    marginTop: 10,
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    textDecorationLine: "underline",
+  },
+  placeholder: {
+    marginTop: 10,
+    textAlign: "center",
+    fontSize: 20,
+    color: "gray",
   },
 });
 
