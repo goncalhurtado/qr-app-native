@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import Topbar from "./Topbar";
 import TabsApp from "./Tabs";
 import { useState, useEffect } from "react";
