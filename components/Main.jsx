@@ -17,8 +17,8 @@ const Main = () => {
   }, [menu]);
   return (
     <View>
-      <Topbar setMenu={setMenu} />
-      <TabsApp setMenu={setMenu} />
+      <Topbar setMenu={setMenu} menu={menu} />
+      {menu === "camera" ? <></> : <TabsApp setMenu={setMenu} />}
       {menu === "url" && <Url setData={setData} />}
       {menu === "whatsapp" && <Whatsapp setData={setData} />}
       {menu === "mail" && <Mail setData={setData} />}
