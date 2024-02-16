@@ -11,7 +11,11 @@ const style = StyleSheet.create({
   },
   input: {
     width: "100%",
-    marginBottom: 5,
+    // marginBottom: 5,
+  },
+  qrContainer: {
+    alignSelf: "center",
+    marginTop: 20,
   },
 });
 

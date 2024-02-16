@@ -1,20 +1,29 @@
 import { Text, View } from "react-native";
 import Topbar from "./Topbar";
 import TabsApp from "./Tabs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Mail from "./generator/Mail";
 import Url from "./generator/Url";
 import Whatsapp from "./generator/Whatsapp";
+import Qr from "./Qr";
+import Scan from "./scanner/Scan";
 
 const Main = () => {
   const [menu, setMenu] = useState("url");
+  const [data, setData] = useState("");
+
+  useEffect(() => {
+    setData("");
+  }, [menu]);
   return (
     <View>
-      <Topbar />
+      <Topbar setMenu={setMenu} />
       <TabsApp setMenu={setMenu} />
-      {menu === "url" && <Url />}
-      {menu === "whatsapp" && <Whatsapp />}
-      {menu === "mail" && <Mail />}
+      {menu === "url" && <Url setData={setData} />}
+      {menu === "whatsapp" && <Whatsapp setData={setData} />}
+      {menu === "mail" && <Mail setData={setData} />}
+      {menu === "camera" && <Scan />}
+      <Qr inputData={data} />
     </View>
   );
 };
