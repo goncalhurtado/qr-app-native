@@ -16,9 +16,11 @@
     "react-native-camera": "^4.2.1",
     "react-native-pager-view": "^6.2.3",
     "react-native-paper-tabs": "^0.10.1",
+    "react-native-qrcode-scanner": "^1.5.5",
     "react-native-svg": "^14.1.0",
     "react-native-tab-view": "^3.5.2",
-    "react-qr-code": "^2.0.12"
+    "react-qr-code": "^2.0.12",
+    "expo-camera": "~14.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

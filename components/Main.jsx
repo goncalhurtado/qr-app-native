@@ -6,6 +6,7 @@ import Mail from "./generator/Mail";
 import Url from "./generator/Url";
 import Whatsapp from "./generator/Whatsapp";
 import Qr from "./Qr";
+import Scan from "./scanner/Scan";
 
 const Main = () => {
   const [menu, setMenu] = useState("url");
@@ -16,11 +17,12 @@ const Main = () => {
   }, [menu]);
   return (
     <View>
-      <Topbar />
+      <Topbar setMenu={setMenu} />
       <TabsApp setMenu={setMenu} />
       {menu === "url" && <Url setData={setData} />}
       {menu === "whatsapp" && <Whatsapp setData={setData} />}
       {menu === "mail" && <Mail setData={setData} />}
+      {menu === "camera" && <Scan />}
       <Qr inputData={data} />
     </View>
   );
