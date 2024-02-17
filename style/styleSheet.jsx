@@ -17,6 +17,11 @@ export const style = StyleSheet.create({
     alignSelf: "center",
     marginTop: 20,
   },
+  saveBtn: {
+    width: "auto",
+    alignSelf: "center",
+    marginTop: 10,
+  },
 });
 
 export const scan = StyleSheet.create({

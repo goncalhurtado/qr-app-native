@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import Topbar from "./Topbar";
 import TabsApp from "./Tabs";
 import { useState, useEffect } from "react";
@@ -16,7 +16,7 @@ const Main = () => {
     setData("");
   }, [menu]);
   return (
-    <View>
+    <ScrollView>
       <Topbar setMenu={setMenu} menu={menu} />
       {menu === "camera" ? <></> : <TabsApp setMenu={setMenu} />}
       {menu === "url" && <Url setData={setData} />}
@@ -24,7 +24,7 @@ const Main = () => {
       {menu === "mail" && <Mail setData={setData} />}
       {menu === "camera" && <Scan />}
       <Qr inputData={data} />
-    </View>
+    </ScrollView>
   );
 };
 
