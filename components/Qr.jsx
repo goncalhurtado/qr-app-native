@@ -6,6 +6,7 @@ import { captureRef } from "react-native-view-shot";
 import { useEffect, useRef, useState } from "react";
 import * as MediaLibrary from "expo-media-library";
 import { Button } from "react-native-paper";
+import Color from "./Color";
 
 const Qr = ({ inputData }) => {
   const [download, setDownload] = useState(false);
@@ -13,6 +14,11 @@ const Qr = ({ inputData }) => {
   const viewShotRef = useRef();
 
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
+
+  //Color QR
+
+  const [color, setColor] = useState({ main: "#000000", bg: "#ffffff" });
+  const [clear, setClear] = useState(false);
 
   const onCapture = async () => {
     try {
@@ -35,29 +41,36 @@ const Qr = ({ inputData }) => {
 
   useEffect(() => {
     requestPermission();
-  }, []);
+    if (color.main !== "#000000" || color.bg !== "#ffffff") {
+      setClear(true);
+    }
+  }, [color]);
 
   return (
     <View>
       {data != "" ? (
-        <ViewShot
-          ref={viewShotRef}
-          captureMode="mount"
-          options={{ format: "jpg" }}
-        >
-          <View style={style.qrContainer}>
-            <QRCode value={data} />
-          </View>
-        </ViewShot>
+        <View style={style.qrContainer}>
+          <ViewShot
+            ref={viewShotRef}
+            captureMode="mount"
+            options={{ format: "jpg" }}
+            style={{ padding: 10 }}
+          >
+            <QRCode value={data} bgColor={color.bg} fgColor={color.main} />
+          </ViewShot>
+          <Color setColor={setColor} color={color} />
+        </View>
       ) : null}
-      <Button
-        style={style.saveBtn}
-        mode="outlined"
-        onPress={onCapture}
-        loading={download}
-      >
-        Save on Gallery
-      </Button>
+      {data != "" ? (
+        <Button
+          style={style.saveBtn}
+          mode="outlined"
+          onPress={onCapture}
+          loading={download}
+        >
+          Save on Gallery
+        </Button>
+      ) : null}
     </View>
   );
 };

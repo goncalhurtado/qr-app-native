@@ -14,8 +14,9 @@ export const style = StyleSheet.create({
     // marginBottom: 5,
   },
   qrContainer: {
-    alignSelf: "center",
-    marginTop: 20,
+    alignSelf: "start",
+    width: "auto",
+    padding: 10,
   },
   saveBtn: {
     width: "auto",
