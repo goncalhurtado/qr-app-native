@@ -3,10 +3,22 @@ export const validationUrl = (input, setError) => {
   const regex =
     /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w-.,@?^=%&:/~+#]*[\w-@?^=%&/~+#])?/;
 
+  const regexWithoutProtocol =
+    /^[\w-]+(\.[\w-]+)+([\w-.,@?^=%&:/~+#]*[\w-@?^=%&/~+#])?/;
+
   if (url === "" || url === null) {
     setError({
       boolean: true,
       message: "Debes ingresar una url",
+    });
+    return false;
+  }
+
+  if (url.match(regexWithoutProtocol)) {
+    setError({
+      boolean: true,
+      message:
+        "Debes incluir 'http://' o 'https://' al inicio de los enlaces para que estos sean válidos.",
     });
     return false;
   }
@@ -19,7 +31,6 @@ export const validationUrl = (input, setError) => {
 };
 
 export const validationWhatsapp = (input, setError) => {
-  console.log(input);
   const { number, message } = input;
   const regex = /^\d{1,15}$/;
 
@@ -94,7 +105,6 @@ export const validationEmail = (input, setError) => {
       type: "message",
       message: "Debes introducir un mensaje",
     });
-    console.log("error");
     return false;
   }
   return true;

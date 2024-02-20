@@ -27,7 +27,6 @@ const Qr = ({ inputData }) => {
         format: "jpg",
         quality: 0.9,
       });
-      console.log("URI creada", uri);
       return uri;
     } catch (error) {
       console.error("Oops, snapshot failed", error);

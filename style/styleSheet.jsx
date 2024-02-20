@@ -31,6 +31,12 @@ export const style = StyleSheet.create({
     width: "auto",
     margin: 0,
   },
+  alert: {
+    backgroundColor: "#f0f0f0",
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+  },
 });
 
 export const scan = StyleSheet.create({

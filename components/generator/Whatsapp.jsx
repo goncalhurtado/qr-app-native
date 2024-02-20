@@ -24,7 +24,7 @@ const Whatsapp = ({ setData }) => {
     });
     setInput((prevState) => ({ ...prevState, [name]: value }));
   };
-  console.log(error);
+
   const handleSubmmit = () => {
     if (!validationWhatsapp(input, setError)) {
       return;
