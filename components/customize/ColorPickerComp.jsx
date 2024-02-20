@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Text,
-  Alert,
-  ActivityIndicator,
-} from "react-native";
+import { View, Dimensions, ActivityIndicator } from "react-native";
 import ColorPicker from "react-native-wheel-color-picker";
 
 const ColorPickerComp = ({ setQrColor, qrColor, toogle }) => {
@@ -24,17 +17,39 @@ const ColorPickerComp = ({ setQrColor, qrColor, toogle }) => {
     }
   }
 
+  const screenWidth = Dimensions.get("window").width;
+
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+      }}
+    >
       <ColorPicker
         selectedColor={toogle ? selectedColor.bg : selectedColor.main}
-        row={true}
+        row={false}
         color={toogle ? qrColor.bg : qrColor.main}
         onColorChangeComplete={(color) => onColorChange(color)}
         wheelLodingIndicator={<ActivityIndicator size={10} />}
         sliderLodingIndicator={<ActivityIndicator size={10} />}
         useNativeDriver={false}
         useNativeLayout={false}
+        thumbSize={40}
+        palette={[
+          "#000000",
+          "#FFFFFF",
+          "#ed1c24",
+          "#d11cd5",
+          "#1633e6",
+          "#00aeef",
+          "#00c85d",
+          "#57ff0a",
+          "#ffde17",
+          "#f26522",
+        ]}
+        style={{ width: screenWidth * 0.8 }}
+        // swatchesLast={false}
       />
     </View>
   );

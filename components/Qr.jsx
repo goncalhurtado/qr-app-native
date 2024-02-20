@@ -36,7 +36,7 @@ const Qr = ({ inputData }) => {
 
   //Color QR
 
-  const [qrColor, setQrColor] = useState({ main: "#000000", bg: "#ffddff" });
+  const [qrColor, setQrColor] = useState({ main: "#000000", bg: "#FFFFFF" });
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {

@@ -7,7 +7,9 @@ const Color = ({ setQrColor, qrColor }) => {
 
   return (
     <>
-      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+      <View
+        style={{ flexDirection: "row", justifyContent: "center", margin: 10 }}
+      >
         <TouchableOpacity
           onPress={() => setToogle(false)}
           style={{ flexDirection: "row", alignItems: "center" }}
@@ -42,6 +44,7 @@ const Color = ({ setQrColor, qrColor }) => {
           <View
             style={{
               margin: 5,
+              marginLeft: 20,
               padding: 0,
               width: 20,
               height: 20,
@@ -61,7 +64,7 @@ const Color = ({ setQrColor, qrColor }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={{ margin: 5 }}>
         <ColorPickerComp
           setQrColor={setQrColor}
           qrColor={qrColor}
