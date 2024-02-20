@@ -28,13 +28,12 @@ export const style = StyleSheet.create({
 export const scan = StyleSheet.create({
   container: {
     width: "100%",
-    height: "75%",
+    height: "60%",
     position: "relative",
   },
   camera: {
     width: "100%",
     height: "100%",
-    position: "absolute",
   },
   icon: {
     position: "absolute",
