@@ -21,11 +21,14 @@ export const style = StyleSheet.create({
   saveBtn: {
     width: "auto",
     alignSelf: "center",
-    marginTop: 10,
+  },
+  editBtn: {
+    width: "auto",
+    alignSelf: "center",
+    marginEnd: 5,
   },
   inputBtn: {
     width: "auto",
-
     margin: 0,
   },
 });

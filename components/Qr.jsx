@@ -11,6 +11,7 @@ import { saveQr } from "../helpers/saveQr";
 import { shareOnWp } from "../helpers/shareQr";
 
 const Qr = ({ inputData }) => {
+  const [share, setShare] = useState(false);
   const [download, setDownload] = useState(false);
   const [qrColor, setQrColor] = useState({ main: "#000000", bg: "#FFFFFF" });
   const [showMenu, setShowMenu] = useState(false);
@@ -41,7 +42,7 @@ const Qr = ({ inputData }) => {
 
   const handleShare = async () => {
     const uri = await createUri();
-    shareOnWp(uri);
+    shareOnWp(uri, setShare);
   };
 
   useEffect(() => {
@@ -54,7 +55,6 @@ const Qr = ({ inputData }) => {
         <View style={style.qrContainer}>
           <ViewShot
             ref={viewShotRef}
-            captureMode="mount"
             options={{ format: "jpg" }}
             style={{ padding: 10 }}
           >
@@ -66,27 +66,38 @@ const Qr = ({ inputData }) => {
         <>
           <View style={{ flexDirection: "row", justifyContent: "center" }}>
             <Button
-              style={style.saveBtn}
-              mode="outlined"
-              onPress={onCapture}
-              loading={download}
-            >
-              Save on Gallery
-            </Button>
-            <Button
-              style={style.saveBtn}
+              icon="palette"
+              style={style.editBtn}
               mode="outlined"
               onPress={() => setShowMenu(!showMenu)}
             >
               Personalizar
             </Button>
             <IconButton
+              icon="download"
+              mode="contained"
+              loading={download}
+              iconColor="#FFFFFF"
+              containerColor="#663399"
+              onPress={onCapture}
+            ></IconButton>
+            <IconButton
+              icon="share"
+              mode="contained"
+              loading={share}
+              iconColor="#FFFFFF"
+              containerColor="#663399"
+              onPress={handleShare}
+            >
+              Compartir
+            </IconButton>
+            {/* <IconButton
               icon="whatsapp"
               containerColor="#25D366"
               iconColor="#FFFFFF"
               mode="contained"
               onPress={handleShare}
-            ></IconButton>
+            ></IconButton> */}
           </View>
           <View style={{ display: showMenu ? "flex" : "none" }}>
             <Color qrColor={qrColor} setQrColor={setQrColor} />
