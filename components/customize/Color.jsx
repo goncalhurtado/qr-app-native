@@ -64,7 +64,7 @@ const Color = ({ setQrColor, qrColor }) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={{ margin: 5 }}>
+      <View style={{ margin: 5, marginBottom: 50 }}>
         <ColorPickerComp
           setQrColor={setQrColor}
           qrColor={qrColor}
