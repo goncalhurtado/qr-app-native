@@ -1,6 +1,6 @@
 import { Camera, CameraType } from "expo-camera";
 import { useState, useEffect } from "react";
-import { Text, View, Linking } from "react-native";
+import { Text, View, Linking, Dimensions, StyleSheet } from "react-native";
 import { Button, IconButton } from "react-native-paper";
 import { scan, style } from "../../style/styleSheet";
 
@@ -15,6 +15,8 @@ const Scan = () => {
     );
   }
 
+  const screenHeight = Dimensions.get("window").height;
+
   function handleBarCodeScanned({ data }) {
     setData(data);
   }
@@ -28,7 +30,7 @@ const Scan = () => {
   }, []);
 
   return (
-    <View>
+    <View style={{ height: screenHeight }}>
       {permission?.granted ? (
         <>
           <View style={scan.container}>
@@ -37,7 +39,7 @@ const Scan = () => {
               type={type}
               onBarCodeScanned={handleBarCodeScanned}
               autoFocus="on"
-            />
+            ></Camera>
             <IconButton
               iconColor="#663399"
               icon="camera-flip"
@@ -73,4 +75,5 @@ const Scan = () => {
     </View>
   );
 };
+
 export default Scan;

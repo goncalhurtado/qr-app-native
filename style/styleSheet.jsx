@@ -14,21 +14,26 @@ export const style = StyleSheet.create({
     // marginBottom: 5,
   },
   qrContainer: {
+    alignSelf: "start",
+    width: "auto",
+    padding: 10,
+  },
+  saveBtn: {
+    width: "auto",
     alignSelf: "center",
-    marginTop: 20,
+    marginTop: 10,
   },
 });
 
 export const scan = StyleSheet.create({
   container: {
     width: "100%",
-    height: "75%",
+    height: "60%",
     position: "relative",
   },
   camera: {
     width: "100%",
     height: "100%",
-    position: "absolute",
   },
   icon: {
     position: "absolute",
