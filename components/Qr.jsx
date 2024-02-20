@@ -5,46 +5,48 @@ import ViewShot from "react-native-view-shot";
 import { captureRef } from "react-native-view-shot";
 import { useEffect, useRef, useState } from "react";
 import * as MediaLibrary from "expo-media-library";
-import { Button } from "react-native-paper";
-import Color from "./Color";
+import { Button, IconButton } from "react-native-paper";
+import Color from "./customize/Color";
+import { saveQr } from "../helpers/saveQr";
+import { shareOnWp } from "../helpers/shareQr";
 
 const Qr = ({ inputData }) => {
   const [download, setDownload] = useState(false);
-  const data = inputData || "";
-  const viewShotRef = useRef();
+  const [qrColor, setQrColor] = useState({ main: "#000000", bg: "#FFFFFF" });
+  const [showMenu, setShowMenu] = useState(false);
 
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
 
-  //Color QR
+  const data = inputData || "";
+  const viewShotRef = useRef();
 
-  const [color, setColor] = useState({ main: "#000000", bg: "#ffffff" });
-  const [clear, setClear] = useState(false);
-
-  const onCapture = async () => {
+  const createUri = async () => {
     try {
-      setDownload(true);
       const uri = await captureRef(viewShotRef, {
         format: "jpg",
-        quality: 0.8,
+        quality: 0.9,
       });
-      console.log("Image saved to", uri);
-      const asset = await MediaLibrary.createAssetAsync(uri);
-      await MediaLibrary.createAlbumAsync("Qr Tool", asset, false);
-      setDownload(false);
-      Alert.alert("Saved", "Your QR has been saved on gallery");
+      console.log("URI creada", uri);
+      return uri;
     } catch (error) {
       console.error("Oops, snapshot failed", error);
-      setDownload(false);
       Alert.alert("Error", "Something went wrong, try again");
     }
   };
 
+  const onCapture = async () => {
+    const uri = await createUri();
+    saveQr(uri, setDownload);
+  };
+
+  const handleShare = async () => {
+    const uri = await createUri();
+    shareOnWp(uri);
+  };
+
   useEffect(() => {
     requestPermission();
-    if (color.main !== "#000000" || color.bg !== "#ffffff") {
-      setClear(true);
-    }
-  }, [color]);
+  }, []);
 
   return (
     <View>
@@ -56,20 +58,40 @@ const Qr = ({ inputData }) => {
             options={{ format: "jpg" }}
             style={{ padding: 10 }}
           >
-            <QRCode value={data} bgColor={color.bg} fgColor={color.main} />
+            <QRCode value={data} bgColor={qrColor.bg} fgColor={qrColor.main} />
           </ViewShot>
-          <Color setColor={setColor} color={color} />
         </View>
       ) : null}
       {data != "" ? (
-        <Button
-          style={style.saveBtn}
-          mode="outlined"
-          onPress={onCapture}
-          loading={download}
-        >
-          Save on Gallery
-        </Button>
+        <>
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            <Button
+              style={style.saveBtn}
+              mode="outlined"
+              onPress={onCapture}
+              loading={download}
+            >
+              Save on Gallery
+            </Button>
+            <Button
+              style={style.saveBtn}
+              mode="outlined"
+              onPress={() => setShowMenu(!showMenu)}
+            >
+              Personalizar
+            </Button>
+            <IconButton
+              icon="whatsapp"
+              containerColor="#25D366"
+              iconColor="#FFFFFF"
+              mode="contained"
+              onPress={handleShare}
+            ></IconButton>
+          </View>
+          <View style={{ display: showMenu ? "flex" : "none" }}>
+            <Color qrColor={qrColor} setQrColor={setQrColor} />
+          </View>
+        </>
       ) : null}
     </View>
   );

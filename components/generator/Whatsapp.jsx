@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Keyboard } from "react-native";
+import { View, Keyboard, ScrollView } from "react-native";
 import { TextInput, HelperText, Button } from "react-native-paper";
 import style from "../../style/styleSheet";
 import { validationWhatsapp } from "../../helpers/validations";
@@ -36,7 +36,7 @@ const Whatsapp = ({ setData }) => {
   };
 
   return (
-    <View style={style.container}>
+    <ScrollView style={style.container}>
       <TextInput
         style={style.input}
         label="Numero de Whatsapp"
@@ -69,7 +69,7 @@ const Whatsapp = ({ setData }) => {
       >
         Generar QR
       </Button>
-    </View>
+    </ScrollView>
   );
 };
 

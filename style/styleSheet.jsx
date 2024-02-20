@@ -14,7 +14,7 @@ export const style = StyleSheet.create({
     // marginBottom: 5,
   },
   qrContainer: {
-    alignSelf: "start",
+    alignSelf: "center",
     width: "auto",
     padding: 10,
   },
@@ -22,6 +22,11 @@ export const style = StyleSheet.create({
     width: "auto",
     alignSelf: "center",
     marginTop: 10,
+  },
+  inputBtn: {
+    width: "auto",
+
+    margin: 0,
   },
 });
 
