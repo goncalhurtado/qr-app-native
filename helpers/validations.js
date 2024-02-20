@@ -33,7 +33,11 @@ export const validationWhatsapp = (input, setError) => {
   }
 
   if (!number.match(regex)) {
-    setError({ type: "error", message: "Introduce un número válido" });
+    setError({
+      boolean: true,
+      type: "number",
+      message: "Introduce un número válido",
+    });
     return false;
   }
 
