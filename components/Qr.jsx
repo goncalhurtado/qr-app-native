@@ -6,7 +6,7 @@ import { captureRef } from "react-native-view-shot";
 import { useEffect, useRef, useState } from "react";
 import * as MediaLibrary from "expo-media-library";
 import { Button } from "react-native-paper";
-import Color from "./Color";
+import Color from "./customize/Color";
 
 const Qr = ({ inputData }) => {
   const [download, setDownload] = useState(false);
@@ -14,11 +14,6 @@ const Qr = ({ inputData }) => {
   const viewShotRef = useRef();
 
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
-
-  //Color QR
-
-  const [color, setColor] = useState({ main: "#000000", bg: "#ffffff" });
-  const [clear, setClear] = useState(false);
 
   const onCapture = async () => {
     try {
@@ -39,12 +34,17 @@ const Qr = ({ inputData }) => {
     }
   };
 
+  //Color QR
+
+  const [qrColor, setQrColor] = useState({ main: "#000000", bg: "#ffddff" });
+  const [showMenu, setShowMenu] = useState(false);
+
   useEffect(() => {
     requestPermission();
-    if (color.main !== "#000000" || color.bg !== "#ffffff") {
-      setClear(true);
-    }
-  }, [color]);
+    // if (color.main !== "#FFF" || color.bg !== "#000") {
+    //   setClear(true);
+    // }
+  }, []);
 
   return (
     <View>
@@ -56,20 +56,33 @@ const Qr = ({ inputData }) => {
             options={{ format: "jpg" }}
             style={{ padding: 10 }}
           >
-            <QRCode value={data} bgColor={color.bg} fgColor={color.main} />
+            <QRCode value={data} bgColor={qrColor.bg} fgColor={qrColor.main} />
           </ViewShot>
-          <Color setColor={setColor} color={color} />
         </View>
       ) : null}
       {data != "" ? (
-        <Button
-          style={style.saveBtn}
-          mode="outlined"
-          onPress={onCapture}
-          loading={download}
-        >
-          Save on Gallery
-        </Button>
+        <>
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            <Button
+              style={style.saveBtn}
+              mode="outlined"
+              onPress={onCapture}
+              loading={download}
+            >
+              Save on Gallery
+            </Button>
+            <Button
+              style={style.saveBtn}
+              mode="outlined"
+              onPress={() => setShowMenu(!showMenu)}
+            >
+              Personalizar
+            </Button>
+          </View>
+          <View style={{ display: showMenu ? "flex" : "none" }}>
+            <Color qrColor={qrColor} setQrColor={setQrColor} />
+          </View>
+        </>
       ) : null}
     </View>
   );
