@@ -1,4 +1,4 @@
-import { View, ScrollView, TouchableOpacity, Text, Alert } from "react-native";
+import { View, Alert } from "react-native";
 import QRCode from "react-qr-code";
 import style from "../style/styleSheet";
 import ViewShot from "react-native-view-shot";
@@ -44,9 +44,15 @@ const Qr = ({ inputData }) => {
     shareOnWp(uri, setShare);
   };
 
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
+  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
   useEffect(() => {
     requestPermission();
-  }, []);
+    if (data === "") {
+      setQrColor({ main: "#000000", bg: "#ffffff" });
+    }
+  }, [data]);
 
   return (
     <View>
@@ -90,15 +96,13 @@ const Qr = ({ inputData }) => {
             >
               Compartir
             </IconButton>
-            {/* <IconButton
-              icon="whatsapp"
-              containerColor="#25D366"
-              iconColor="#FFFFFF"
-              mode="contained"
-              onPress={handleShare}
-            ></IconButton> */}
           </View>
-          <View style={{ display: showMenu ? "flex" : "none" }}>
+          <View
+            style={{
+              display: showMenu ? "flex" : "none",
+              backgroundColor: "#f0f0f0",
+            }}
+          >
             <Color qrColor={qrColor} setQrColor={setQrColor} />
           </View>
         </>

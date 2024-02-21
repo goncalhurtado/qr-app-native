@@ -24,6 +24,8 @@ const ColorPickerComp = ({ setQrColor, qrColor, toogle }) => {
       style={{
         flex: 1,
         alignItems: "center",
+        backgroundColor: "#f0f0f0",
+        paddingBottom: 10,
       }}
     >
       <ColorPicker
