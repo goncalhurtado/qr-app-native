@@ -1,70 +1,65 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import ColorPickerComp from "./ColorPickerComp";
+import { colorComp } from "../../style/styleSheet";
+import { Button, IconButton } from "react-native-paper";
 
 const Color = ({ setQrColor, qrColor }) => {
   const [toogle, setToogle] = useState(false);
+  const [clean, setClean] = useState(false);
 
+  const clearColors = () => {
+    setQrColor({ main: "#000000", bg: "#ffffff" });
+    setClean(false);
+  };
+
+  useEffect(() => {
+    if (qrColor.main !== "#000000" || qrColor.bg !== "#ffffff") {
+      setClean(true);
+    }
+  }, [qrColor]);
   return (
     <>
-      <View
-        style={{ flexDirection: "row", justifyContent: "center", margin: 10 }}
-      >
+      <View style={colorComp.container}>
         <TouchableOpacity
           onPress={() => setToogle(false)}
-          style={{ flexDirection: "row", alignItems: "center" }}
-          onTouc
+          style={colorComp.touchable}
         >
           <View
-            style={{
-              margin: 5,
-              padding: 0,
-              width: 20,
-              height: 20,
-              borderWidth: 1,
-              borderColor: "black",
-              backgroundColor: qrColor.main,
-            }}
+            style={[colorComp.colorBox, { backgroundColor: qrColor.main }]}
           />
           <Text
-            style={{
-              margin: 0,
-              padding: 0,
-              marginBottom: 1,
-              textDecorationLine: !toogle ? "underline" : "none",
-            }}
+            style={[
+              colorComp.text,
+              { textDecorationLine: !toogle ? "underline" : "none" },
+            ]}
           >
             Color Principal
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setToogle(true)}
-          style={{ flexDirection: "row", alignItems: "center" }}
+          style={colorComp.touchable}
         >
-          <View
-            style={{
-              margin: 5,
-              marginLeft: 20,
-              padding: 0,
-              width: 20,
-              height: 20,
-              borderWidth: 1,
-              borderColor: "black",
-              backgroundColor: qrColor.bg,
-            }}
-          />
+          <View style={[colorComp.colorBox, { backgroundColor: qrColor.bg }]} />
           <Text
-            style={{
-              margin: 0,
-              padding: 0,
-              textDecorationLine: toogle ? "underline" : "none",
-            }}
+            style={[
+              colorComp.text,
+              { textDecorationLine: toogle ? "underline" : "none" },
+            ]}
           >
             Color Fondo
           </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => clearColors()}
+          style={[colorComp.touchable, { opacity: clean ? 1 : 0 }]}
+        >
+          <Text style={colorComp.clean}>Limpiar</Text>
+        </TouchableOpacity>
       </View>
-      <View style={{ margin: 5, marginBottom: 50 }}>
+      <View style={colorComp.colorPicker}>
         <ColorPickerComp
           setQrColor={setQrColor}
           qrColor={qrColor}

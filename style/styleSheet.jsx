@@ -31,6 +31,12 @@ export const style = StyleSheet.create({
     width: "auto",
     margin: 0,
   },
+  alert: {
+    backgroundColor: "#f0f0f0",
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+  },
 });
 
 export const scan = StyleSheet.create({
@@ -65,6 +71,39 @@ export const scan = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     color: "gray",
+  },
+});
+
+export const colorComp = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    margin: 10,
+    justifyContent: "space-around",
+  },
+  touchable: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  colorBox: {
+    margin: 5,
+    padding: 0,
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: "black",
+  },
+  text: {
+    margin: 0,
+    padding: 0,
+    marginBottom: 1,
+  },
+  clean: {
+    margin: 5,
+    padding: 0,
+  },
+  colorPicker: {
+    margin: 5,
+    marginBottom: 50,
   },
 });
 
